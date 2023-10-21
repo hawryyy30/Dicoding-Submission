@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Bookshelf App</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet" />
+		<link rel="stylesheet" href="./assets/style/style.css" />
+		<script src="https://kit.fontawesome.com/dfd16fe9b0.js" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<header>
+			<div class="welcome-message">
+				<h2>👋 Howdyy, Hawryyy</h2>
+				<pcl>What book do you want to read today?</pcl>
+			</div>
+			<h2 class="logo">BookShelfApp.</h2>
+		</header>
+		<main>
+			<section>
+				<div id="search-bar">
+					<input type="text" name="input-book-name" id="input-book-name" placeholder="Search books....." />
+					<input type="button" name="search-button" id="search-button" value="Search" />
+					<input type="button" name="add-book-button" id="add-book-button" value="Add Book" />
+				</div>
+
+					<form class="add-book-modal hidden" action="#">
+						<h1>Add Book</h1>
+						<input type="text" id="book-title" placeholder="Title" required />
+						<input type="number" id="book-year"  placeholder="Year" required />
+						<input type="text" id="book-author"  placeholder="Author" required />
+						<button type="submit" id="addToFinished">Add To Finished List</button>
+						<button id="addToOngoing">Add To Ongoing List</button>
+					</form>
+
+				</div>
+				<div id="statistic-bar">
+					<div class="finishedStat">
+						<h4>4</h4>
+						<p>Finished</p>
+					</div>
+					<div class="finishedStat">
+						<h4>1</h4>
+						<p>Ongoing</p>
+					</div>
+					<div class="finishedStat">
+						<h4>5</h4>
+						<p>Books</p>
+					</div>
+				</div>
+				<div id="booklist">
+					<div class="ongoing booklist">
+						<h2>Ongoing</h2>
+						<div class="bookshelf">
+							<div class="book-card">
+								<div class="book-illustration"></div>
+								<p class="book-title">Emotional Design</p>
+								<p class="book-author">Don Roman,2009</p>
+								<button class="deleteButton">
+									<i class="fa-solid fa-trash"></i>
+									Delete
+								</button>
+								<button class="read"><i class="fa-solid fa-check"></i> Read</button>
+							</div>
+							<div class="book-card">
+								<div class="book-illustration"></div>
+								<p class="book-title">Emotional Design</p>
+								<p class="book-author">Don Roman,2009</p>
+								<button class="read"><i class="fa-solid fa-check"></i> Read</button>
+								<button class="delete">
+									<i class="fa-solid fa-trash"></i>
+									Delete
+								</button>
+							</div>
+							<div class="book-card">
+								<div class="book-illustration"></div>
+								<p class="book-title">Emotional Design</p>
+								<p class="book-author">Don Roman,2009</p>
+								<button class="read"><i class="fa-solid fa-check"></i> Read</button>
+								<button class="delete">
+									<i class="fa-solid fa-trash"></i>
+									Delete
+								</button>
+							</div>
+							<div class="book-card">
+								<div class="book-illustration"></div>
+								<p class="book-title">Emotional Design</p>
+								<p class="book-author">Don Roman,2009</p>
+								<button class="read"><i class="fa-solid fa-check"></i> Read</button>
+								<button class="delete">
+									<i class="fa-solid fa-trash"></i>
+									Delete
+								</button>
+							</div>
+						</div>
+					</div>
+					<div class="finished booklist">
+						<h2>Finished</h2>
+						<div class="bookshelf">
+							<div class="book-card">
+								<div class="book-illustration"></div>
+								<p class="book-title">Emotional Design</p>
+								<p class="book-author">Don Roman,2009</p>
+								<button class="delete">
+									<i class="fa-solid fa-trash"></i>
+									Delete
+								</button>
+								<button class="read"><i class="fa-solid fa-check"></i> Read</button>
+							</div>
+							<div class="book-card">
+								<div class="book-illustration"></div>
+								<p class="book-title">Emotional Design</p>
+								<p class="book-author">Don Roman,2009</p>
+								<button class="delete">
+									<i class="fa-solid fa-trash"></i>
+									Delete
+								</button>
+								<button class="read"><i class="fa-solid fa-check"></i> Read</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</section>
+			<aside>
+				<div id="clock">
+					<p>Yo, it's <br /><span class="clock">9:04 AM</span></p>
+				</div>
+				<div id="favorite-book">
+					<h2>Favorites</h2>
+					<div class="bookshelf">
+						<div class="book-card">
+							<div class="book-illustration"></div>
+							<p class="book-title">Emotional Design</p>
+							<p class="book-author">Don Roman,2009</p>
+							<button class="delete">
+								<i class="fa-solid fa-trash"></i>
+								Delete
+							</button>
+						</div>
+					</div>
+				</div>
+			</aside>
+		</main>
+		<footer>
+			<p>
+				BookshelfApp Copyright © 2023 <br />
+				Created By Harry as Dicoding Submission
+			</p>
+		</footer>
+
+		<script src="./script/app.js"></script>
+	</body>
+</html>
