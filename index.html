@@ -26,27 +26,26 @@
 					<input type="button" name="add-book-button" id="add-book-button" value="Add Book" />
 				</div>
 
-					<form class="add-book-modal hidden" action="#">
-						<h1>Add Book</h1>
-						<input type="text" id="book-title" placeholder="Title" required />
-						<input type="number" id="book-year"  placeholder="Year" required />
-						<input type="text" id="book-author"  placeholder="Author" required />
-						<button type="submit" id="addToFinished">Add To Finished List</button>
-						<button id="addToOngoing">Add To Ongoing List</button>
-					</form>
+				<form class="add-book-modal hidden" action="#">
+					<h1>Add Book</h1>
+					<input type="text" id="book-title" placeholder="Title" required />
+					<input type="number" id="book-year" placeholder="Year" required />
+					<input type="text" id="book-author" placeholder="Author" required />
+					<button type="submit" id="addToFinished">Add To Finished List</button>
+					<button id="addToOngoing">Add To Ongoing List</button>
+				</form>
 
-				</div>
 				<div id="statistic-bar">
 					<div class="finishedStat">
-						<h4>4</h4>
+						<h4 id="finishedCounter">4</h4>
 						<p>Finished</p>
 					</div>
 					<div class="finishedStat">
-						<h4>1</h4>
+						<h4 id="onGoingCounter">1</h4>
 						<p>Ongoing</p>
 					</div>
 					<div class="finishedStat">
-						<h4>5</h4>
+						<h4 id="bookCounter">5</h4>
 						<p>Books</p>
 					</div>
 				</div>

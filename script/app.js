@@ -22,11 +22,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	bookshelf.addEventListener('click',(e)=>{
 		if(e.target.classList.contains("deleteButton")){
-			const bookId = e.target.parentElement.getAttribute("bookId");
-			const bookList = JSON.parse(localStorage.getItem(bookListKey));
-			const newBookList = bookList.filter((book) => book.bookid !== +bookId);
-			localStorage.setItem(bookListKey, JSON.stringify(newBookList));
-			renderCards();
+			if(confirm("Apakah kamu yakin ingin menghapus buku ini?")){
+				const bookId = e.target.parentElement.getAttribute("bookId");
+				const bookList = JSON.parse(localStorage.getItem(bookListKey));
+				const newBookList = bookList.filter((book) => book.bookid !== +bookId);
+				localStorage.setItem(bookListKey, JSON.stringify(newBookList));
+				renderCards();
+			}
 		}
 	})
 
@@ -92,6 +94,35 @@ document.addEventListener("DOMContentLoaded", () => {
 		document.querySelector("#book-author").value = "";
 	}
 
+	function countBooks() {
+		const finishedCounter = document.querySelector("#finishedCounter");
+		const ongoingCounter = document.querySelector("#onGoingCounter");
+		const bookCounter = document.querySelector("#bookCounter");
+
+		let bookList = JSON.parse(localStorage.getItem(bookListKey));
+		if (bookList === null || bookList.length === 0) {
+			finishedCounter.textContent = 0;
+			ongoingCounter.textContent = 0;
+			bookCounter.textContent = 0;
+			return;
+		}
+		let finishedCounterValue = 0;
+		let ongoingCounterValue = 0;
+		let bookCounterValue = 0;
+		for (const book of bookList) {
+			if (book.isComplete) {
+				finishedCounterValue++;
+			} else {
+				ongoingCounterValue++;
+			}
+			bookCounterValue++;
+		}
+		finishedCounter.textContent = finishedCounterValue;
+		ongoingCounter.textContent = ongoingCounterValue;
+		bookCounter.textContent = bookCounterValue;
+
+	}
+
 	function renderCards() {
 		let bookList = JSON.parse(localStorage.getItem(bookListKey));
 		const onGoingBookShelf = document.querySelector(".ongoing .bookshelf");
@@ -139,6 +170,7 @@ document.addEventListener("DOMContentLoaded", () => {
 	  
 		onGoingBookShelf.innerHTML = onGoingBookCards;
 		finishedBookShelf.innerHTML = finishedBookCards;
+		countBooks();
 	  }
 
 	function addNewBook(newBook) {
