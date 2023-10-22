@@ -3,10 +3,9 @@ const addBookButton = document.querySelector("#add-book-button");
 const bookListKey = "booklist";
 
 document.addEventListener("DOMContentLoaded", () => {
-	renderCards();
 	if (typeof Storage !== "undefined") {
 		if (localStorage.getItem(bookListKey) === null) {
-			localStorage.setItem(bookListKey, "");
+			localStorage.setItem(bookListKey, JSON.stringify([]));
 		}
 	} else {
 		alert("Your Browser doesn't support Local Storage");
@@ -19,18 +18,104 @@ document.addEventListener("DOMContentLoaded", () => {
 	const addToFinishedButton = document.querySelector("#addToFinished");
 	const addToOngoingButton = document.querySelector("#addToOngoing");
 	const bookshelf = document.querySelector("#booklist");
+	const searchButton = document.querySelector("#search-button");
+	renderCards();
 
-	bookshelf.addEventListener('click',(e)=>{
-		if(e.target.classList.contains("deleteButton")){
-			if(confirm("Apakah kamu yakin ingin menghapus buku ini?")){
+	searchButton.addEventListener("click", (e) => {
+		const searchValue = document.querySelector("#input-book-name").value;
+
+		if (searchValue === "") {
+			renderCards();
+			return;
+		}
+		const bookList = JSON.parse(localStorage.getItem(bookListKey));
+		const filteredBookList = bookList.filter((book) => {
+			return book.bookTitle.toLowerCase().includes(searchValue.toLowerCase());
+		});
+		const onGoingBookShelf = document.querySelector(".ongoing .bookshelf");
+		const finishedBookShelf = document.querySelector(".finished .bookshelf");
+		let onGoingBookCards = "";
+		let finishedBookCards = "";
+		if (filteredBookList === null || filteredBookList.length === 0) {
+			onGoingBookShelf.innerHTML = `No books found with the title "${searchValue}"`;
+			finishedBookShelf.innerHTML = `No books found with the title "${searchValue}"`;
+			return;
+		}
+		for (const book of filteredBookList) {
+			if (!book.isComplete) {
+				onGoingBookCards += `
+				  <div class="book-card" bookId="${book.bookid}">
+					<div class="book-illustration"></div>
+					<p class="book-title">${book.bookTitle}</p>
+					<p class="book-author">${book.bookAuthor}, ${book.bookYear}</p>
+					<button class="deleteButton">
+					  <i class="fa-solid fa-trash"></i> Delete
+					</button>
+					<button class="read">
+					  <i class="fa-solid fa-check"></i> Read
+					</button>
+				  </div>
+				`;
+			} else {
+				finishedBookCards += `
+				  <div class="book-card" bookId="${book.bookid}">
+					<div class="book-illustration"></div>
+					<p class="book-title">${book.bookTitle}</p>
+					<p class="book-author">${book.bookAuthor}, ${book.bookYear}</p>
+					<button class="deleteButton">
+					  <i class="fa-solid fa-trash"></i> Delete
+					</button>
+					<button class="unread">
+					  <i class="fa-solid fa-x"></i> Unread
+					</button>
+				  </div>
+				`;
+			}
+		}
+		onGoingBookShelf.innerHTML = onGoingBookCards;
+		finishedBookShelf.innerHTML = finishedBookCards;
+		countBooks();
+	});
+
+	bookshelf.addEventListener("click", (e) => {
+		if (e.target.classList.contains("deleteButton")) {
+			if (confirm("Are you sure you want to delete this book?")) {
 				const bookId = e.target.parentElement.getAttribute("bookId");
 				const bookList = JSON.parse(localStorage.getItem(bookListKey));
 				const newBookList = bookList.filter((book) => book.bookid !== +bookId);
 				localStorage.setItem(bookListKey, JSON.stringify(newBookList));
 				renderCards();
 			}
+		} else if (e.target.classList.contains("read")) {
+			const bookId = e.target.parentElement.getAttribute("bookId");
+			const bookList = JSON.parse(localStorage.getItem(bookListKey));
+			const newBookList = bookList.map((book) => {
+				if (book.bookid === +bookId) {
+					return {
+						...book,
+						isComplete: true,
+					};
+				}
+				return book;
+			});
+			localStorage.setItem(bookListKey, JSON.stringify(newBookList));
+			renderCards();
+		} else if (e.target.classList.contains("unread")) {
+			const bookId = e.target.parentElement.getAttribute("bookId");
+			const bookList = JSON.parse(localStorage.getItem(bookListKey));
+			const newBookList = bookList.map((book) => {
+				if (book.bookid === +bookId) {
+					return {
+						...book,
+						isComplete: false,
+					};
+				}
+				return book;
+			});
+			localStorage.setItem(bookListKey, JSON.stringify(newBookList));
+			renderCards();
 		}
-	})
+	});
 
 	setInterval(() => {
 		const date = new Date();
@@ -120,7 +205,6 @@ document.addEventListener("DOMContentLoaded", () => {
 		finishedCounter.textContent = finishedCounterValue;
 		ongoingCounter.textContent = ongoingCounterValue;
 		bookCounter.textContent = bookCounterValue;
-
 	}
 
 	function renderCards() {
@@ -131,13 +215,19 @@ document.addEventListener("DOMContentLoaded", () => {
 		let finishedBookCards = "";
 	  
 		if (bookList === null || bookList.length === 0) {
-		  onGoingBookShelf.innerHTML = "";
-		  finishedBookShelf.innerHTML = "";
+		  onGoingBookShelf.innerHTML = "You are not currently reading any books.";
+		  finishedBookShelf.innerHTML = "You haven't finished any books yet.";
+		  countBooks();
 		  return;
 		}
 	  
-		for (const book of bookList) {
-		  if (!book.isComplete) {
+		const onGoingBooks = bookList.filter((book) => !book.isComplete);
+		const finishedBooks = bookList.filter((book) => book.isComplete);
+	  
+		if (onGoingBooks.length === 0) {
+		  onGoingBookShelf.innerHTML = "You are not currently reading any books.";
+		} else {
+		  for (const book of onGoingBooks) {
 			onGoingBookCards += `
 			  <div class="book-card" bookId="${book.bookid}">
 				<div class="book-illustration"></div>
@@ -151,7 +241,14 @@ document.addEventListener("DOMContentLoaded", () => {
 				</button>
 			  </div>
 			`;
-		  } else {
+		  }
+		  onGoingBookShelf.innerHTML = onGoingBookCards;
+		}
+	  
+		if (finishedBooks.length === 0) {
+		  finishedBookShelf.innerHTML = "You haven't finished any books yet.";
+		} else {
+		  for (const book of finishedBooks) {
 			finishedBookCards += `
 			  <div class="book-card" bookId="${book.bookid}">
 				<div class="book-illustration"></div>
@@ -160,16 +257,15 @@ document.addEventListener("DOMContentLoaded", () => {
 				<button class="deleteButton">
 				  <i class="fa-solid fa-trash"></i> Delete
 				</button>
-				<button class="read">
+				<button class="unread">
 				  <i class="fa-solid fa-x"></i> Unread
 				</button>
 			  </div>
 			`;
 		  }
+		  finishedBookShelf.innerHTML = finishedBookCards;
 		}
 	  
-		onGoingBookShelf.innerHTML = onGoingBookCards;
-		finishedBookShelf.innerHTML = finishedBookCards;
 		countBooks();
 	  }
 

@@ -3,20 +3,26 @@
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-		<title>Bookshelf App</title>
+		<title>Boo'Hive</title>
+		<link rel="apple-touch-icon" sizes="180x180" href="assets/favicon/apple-touch-icon.png" />
+		<link rel="icon" type="image/png" sizes="32x32" href="assets/favicon/favicon-32x32.png" />
+		<link rel="icon" type="image/png" sizes="16x16" href="assets/favicon/favicon-16x16.png" />
+		<link rel="manifest" href="assets/favicon/site.webmanifest" />
+		<link rel="mask-icon" href="assets/favicon/safari-pinned-tab.svg" color="#5bbad5" />
+		<meta name="msapplication-TileColor" content="#da532c" />
+		<meta name="theme-color" content="#ffffff" />
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link href="https://fonts.googleapis.com/css2?family=Itim&display=swap" rel="stylesheet" />
 		<link rel="stylesheet" href="./assets/style/style.css" />
-		<script src="https://kit.fontawesome.com/dfd16fe9b0.js" crossorigin="anonymous"></script>
 	</head>
 	<body>
 		<header>
 			<div class="welcome-message">
 				<h2>👋 Howdyy, Hawryyy</h2>
-				<pcl>What book do you want to read today?</pcl>
+				<h3>What book do you want to read today?</h3>
 			</div>
-			<h2 class="logo">BookShelfApp.</h2>
+			<h2 class="logo">Boo'Hive.</h2>
 		</header>
 		<main>
 			<section>
@@ -37,94 +43,32 @@
 
 				<div id="statistic-bar">
 					<div class="finishedStat">
-						<h4 id="finishedCounter">4</h4>
+						<h4 id="finishedCounter">0</h4>
 						<p>Finished</p>
 					</div>
 					<div class="finishedStat">
-						<h4 id="onGoingCounter">1</h4>
+						<h4 id="onGoingCounter">0</h4>
 						<p>Ongoing</p>
 					</div>
 					<div class="finishedStat">
-						<h4 id="bookCounter">5</h4>
+						<h4 id="bookCounter">0</h4>
 						<p>Books</p>
 					</div>
 				</div>
 				<div id="booklist">
 					<div class="ongoing booklist">
 						<h2>Ongoing</h2>
-						<div class="bookshelf">
-							<div class="book-card">
-								<div class="book-illustration"></div>
-								<p class="book-title">Emotional Design</p>
-								<p class="book-author">Don Roman,2009</p>
-								<button class="deleteButton">
-									<i class="fa-solid fa-trash"></i>
-									Delete
-								</button>
-								<button class="read"><i class="fa-solid fa-check"></i> Read</button>
-							</div>
-							<div class="book-card">
-								<div class="book-illustration"></div>
-								<p class="book-title">Emotional Design</p>
-								<p class="book-author">Don Roman,2009</p>
-								<button class="read"><i class="fa-solid fa-check"></i> Read</button>
-								<button class="delete">
-									<i class="fa-solid fa-trash"></i>
-									Delete
-								</button>
-							</div>
-							<div class="book-card">
-								<div class="book-illustration"></div>
-								<p class="book-title">Emotional Design</p>
-								<p class="book-author">Don Roman,2009</p>
-								<button class="read"><i class="fa-solid fa-check"></i> Read</button>
-								<button class="delete">
-									<i class="fa-solid fa-trash"></i>
-									Delete
-								</button>
-							</div>
-							<div class="book-card">
-								<div class="book-illustration"></div>
-								<p class="book-title">Emotional Design</p>
-								<p class="book-author">Don Roman,2009</p>
-								<button class="read"><i class="fa-solid fa-check"></i> Read</button>
-								<button class="delete">
-									<i class="fa-solid fa-trash"></i>
-									Delete
-								</button>
-							</div>
-						</div>
+						<div class="bookshelf"></div>
 					</div>
 					<div class="finished booklist">
 						<h2>Finished</h2>
-						<div class="bookshelf">
-							<div class="book-card">
-								<div class="book-illustration"></div>
-								<p class="book-title">Emotional Design</p>
-								<p class="book-author">Don Roman,2009</p>
-								<button class="delete">
-									<i class="fa-solid fa-trash"></i>
-									Delete
-								</button>
-								<button class="read"><i class="fa-solid fa-check"></i> Read</button>
-							</div>
-							<div class="book-card">
-								<div class="book-illustration"></div>
-								<p class="book-title">Emotional Design</p>
-								<p class="book-author">Don Roman,2009</p>
-								<button class="delete">
-									<i class="fa-solid fa-trash"></i>
-									Delete
-								</button>
-								<button class="read"><i class="fa-solid fa-check"></i> Read</button>
-							</div>
-						</div>
+						<div class="bookshelf"></div>
 					</div>
 				</div>
 			</section>
 			<aside>
 				<div id="clock">
-					<p>Yo, it's <br /><span class="clock">9:04 AM</span></p>
+					<p>Yo, it's <br /><span class="clock">Loading...</span></p>
 				</div>
 				<div id="favorite-book">
 					<h2>Favorites</h2>
@@ -135,7 +79,7 @@
 							<p class="book-author">Don Roman,2009</p>
 							<button class="delete">
 								<i class="fa-solid fa-trash"></i>
-								Delete
+								Remove
 							</button>
 						</div>
 					</div>
@@ -144,11 +88,11 @@
 		</main>
 		<footer>
 			<p>
-				BookshelfApp Copyright © 2023 <br />
-				Created By Harry as Dicoding Submission
+				Boo'Hive © 2023 Harry <br />
+				Dicoding Submission.
 			</p>
 		</footer>
-
+		<script src="https://kit.fontawesome.com/dfd16fe9b0.js" crossorigin="anonymous"></script>
 		<script src="./script/app.js"></script>
 	</body>
 </html>
