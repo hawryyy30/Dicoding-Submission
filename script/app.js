@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	searchButton.addEventListener("click", (e) => {
 		const searchValue = document.querySelector("#input-book-name").value;
-
+		bookshelf.scrollIntoView({ behavior: "smooth", block: "start" });
 		if (searchValue === "") {
 			renderCards();
 			return;
@@ -213,22 +213,22 @@ document.addEventListener("DOMContentLoaded", () => {
 		const finishedBookShelf = document.querySelector(".finished .bookshelf");
 		let onGoingBookCards = "";
 		let finishedBookCards = "";
-	  
+
 		if (bookList === null || bookList.length === 0) {
-		  onGoingBookShelf.innerHTML = "You are not currently reading any books.";
-		  finishedBookShelf.innerHTML = "You haven't finished any books yet.";
-		  countBooks();
-		  return;
+			onGoingBookShelf.innerHTML = "You are not currently reading any books.";
+			finishedBookShelf.innerHTML = "You haven't finished any books yet.";
+			countBooks();
+			return;
 		}
-	  
+
 		const onGoingBooks = bookList.filter((book) => !book.isComplete);
 		const finishedBooks = bookList.filter((book) => book.isComplete);
-	  
+
 		if (onGoingBooks.length === 0) {
-		  onGoingBookShelf.innerHTML = "You are not currently reading any books.";
+			onGoingBookShelf.innerHTML = "You are not currently reading any books.";
 		} else {
-		  for (const book of onGoingBooks) {
-			onGoingBookCards += `
+			for (const book of onGoingBooks) {
+				onGoingBookCards += `
 			  <div class="book-card" bookId="${book.bookid}">
 				<div class="book-illustration"></div>
 				<p class="book-title">${book.bookTitle}</p>
@@ -241,15 +241,15 @@ document.addEventListener("DOMContentLoaded", () => {
 				</button>
 			  </div>
 			`;
-		  }
-		  onGoingBookShelf.innerHTML = onGoingBookCards;
+			}
+			onGoingBookShelf.innerHTML = onGoingBookCards;
 		}
-	  
+
 		if (finishedBooks.length === 0) {
-		  finishedBookShelf.innerHTML = "You haven't finished any books yet.";
+			finishedBookShelf.innerHTML = "You haven't finished any books yet.";
 		} else {
-		  for (const book of finishedBooks) {
-			finishedBookCards += `
+			for (const book of finishedBooks) {
+				finishedBookCards += `
 			  <div class="book-card" bookId="${book.bookid}">
 				<div class="book-illustration"></div>
 				<p class="book-title">${book.bookTitle}</p>
@@ -262,12 +262,12 @@ document.addEventListener("DOMContentLoaded", () => {
 				</button>
 			  </div>
 			`;
-		  }
-		  finishedBookShelf.innerHTML = finishedBookCards;
+			}
+			finishedBookShelf.innerHTML = finishedBookCards;
 		}
-	  
+
 		countBooks();
-	  }
+	}
 
 	function addNewBook(newBook) {
 		let bookList = [];
