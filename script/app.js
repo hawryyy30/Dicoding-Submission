@@ -133,6 +133,7 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     addToFinishedButton.addEventListener("click", (e) => {
+		e.preventDefault();
         const bookTitle = document.querySelector("#book-title").value;
         const bookYear = document.querySelector("#book-year").value;
         const bookAuthor = document.querySelector("#book-author").value;
@@ -147,13 +148,13 @@ document.addEventListener("DOMContentLoaded", () => {
             author: bookAuthor,
             isComplete: true,
         };
-        console.log(newBook);
         resetForm();
         addNewBook(newBook);
         renderCards();
     });
 
     addToOngoingButton.addEventListener("click", (e) => {
+		e.preventDefault();
         const bookTitle = document.querySelector("#book-title").value;
         const bookYear = document.querySelector("#book-year").value;
         const bookAuthor = document.querySelector("#book-author").value;

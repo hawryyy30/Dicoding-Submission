@@ -126,7 +126,7 @@ section {
 }
 
 .book-card {
-	min-width: 40%;
+	min-width: 200px;
 	gap: 0.5rem;
 	display: flex;
 	background-color: var(--bg-400);
@@ -189,7 +189,7 @@ aside .bookshelf {
 	font-size: 1.5rem;
 }
 .clock {
-	font-size: 2.5rem;
+	font-size: 2rem;
 }
 #addToOngoing{
 	background-color: var(--bg-400);
@@ -219,4 +219,5 @@ footer {
 		max-width: 100%;
 		width: 100%;
 	}
+
 }
